@@ -14,7 +14,7 @@ def get_args():
 
 def htmlize(string):
     """Convert markup to HTML."""
-    m = re.search("(.*)\*(.+)\*(.*)", string)
+    m = re.search(r"(.*)\*(.+)\*(.*)", string)
     return m.group(1) + "<b>" + m.group(2) + "</b>" + m.group(3) if m else string
 
 def output_list(f, contents):
