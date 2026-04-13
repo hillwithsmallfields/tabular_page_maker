@@ -14,7 +14,7 @@ def get_args():
 
 def htmlize(string):
     """Convert markup to HTML."""
-    m = re.search("(.*)\\*(.+)\\*(.*)", string)
+    m = re.search(r"(.*)\*(.+)\*(.*)", string)
     return m.group(1) + "<b>" + m.group(2) + "</b>" + m.group(3) if m else string
 
 def output_list(f, contents):
@@ -31,15 +31,15 @@ def output_list(f, contents):
 def safename(name):
     return name.replace(' ', '').replace('-', '').lower()
 
-def output_table(table, filename, stylesheet=None):
-    with open(filename, 'w') as f:
+def output_table(table, output, stylesheet=None):
+    with open(output, 'w') as f:
         widest = 0
         for groupname, group in table.items():
             groupwidth = len(group)
             if groupwidth > widest:
                 widest = groupwidth
         f.write("<html>\n  <head>\n    <title>")
-        f.write(os.path.basename(filename).split('.')[0].capitalize())
+        f.write(os.path.basename(output).split('.')[0].capitalize())
         f.write("</title>\n")
         if stylesheet:
             f.write("<style>\n")
