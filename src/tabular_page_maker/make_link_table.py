@@ -14,7 +14,7 @@ def get_args():
 
 def htmlize(string):
     """Convert markup to HTML."""
-    m = re.search("(.*)\*(.+)\*(.*)", string)
+    m = re.search("(.*)\\*(.+)\\*(.*)", string)
     return m.group(1) + "<b>" + m.group(2) + "</b>" + m.group(3) if m else string
 
 def output_list(f, contents):
@@ -66,8 +66,7 @@ def output_table(table, filename, stylesheet=None):
 def main(inputfile, stylesheet, output):
     """Make a compact HTML links page."""
     with open(inputfile) as infile:
-        contents = yaml.load(infile, Loader=yaml.SafeLoader)
-        output_table(contents,
+        output_table(yaml.load(infile, Loader=yaml.SafeLoader),
                      output or (inputfile + ".html"),
                      stylesheet=stylesheet)
 
